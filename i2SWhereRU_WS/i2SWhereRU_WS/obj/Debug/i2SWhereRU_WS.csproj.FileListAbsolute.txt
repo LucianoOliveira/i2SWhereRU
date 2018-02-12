@@ -1,0 +1,8 @@
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\i2SWhereRU_WS\bin\i2SWhereRU_WS.dll.config
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\i2SWhereRU_WS\bin\i2SWhereRU_WS.dll
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\i2SWhereRU_WS\bin\i2SWhereRU_WS.pdb
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\i2SWhereRU_WS\bin\EntityFramework.dll
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\i2SWhereRU_WS\bin\EntityFramework.xml
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\i2SWhereRU_WS\obj\Debug\i2SWhereRU_WS.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\i2SWhereRU_WS\obj\Debug\i2SWhereRU_WS.dll
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\i2SWhereRU_WS\obj\Debug\i2SWhereRU_WS.pdb

@@ -1,0 +1,9 @@
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\TestWSApp\bin\Debug\TestWSApp.exe.config
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\TestWSApp\bin\Debug\TestWSApp.exe
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\TestWSApp\bin\Debug\TestWSApp.pdb
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\TestWSApp\obj\Debug\TestWSApp.Form1.resources
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\TestWSApp\obj\Debug\TestWSApp.Properties.Resources.resources
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\TestWSApp\obj\Debug\TestWSApp.csproj.GenerateResource.Cache
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\TestWSApp\obj\Debug\TestWSApp.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\TestWSApp\obj\Debug\TestWSApp.exe
+\\Mac\Home\Desktop\i2SWhereRU\i2SWhereRU_WS\TestWSApp\obj\Debug\TestWSApp.pdb

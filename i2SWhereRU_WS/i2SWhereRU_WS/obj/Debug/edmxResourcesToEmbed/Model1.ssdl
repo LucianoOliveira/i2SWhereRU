@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="i2SWhereRUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Maps">
+    <Key>
+      <PropertyRef Name="m_id" />
+    </Key>
+    <Property Name="m_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="m_description" Type="varchar" MaxLength="50" />
+    <Property Name="m_image_location" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Persons">
+    <Key>
+      <PropertyRef Name="p_id" />
+    </Key>
+    <Property Name="p_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="p_name" Type="varchar" MaxLength="100" />
+    <Property Name="p_image_location" Type="varchar" MaxLength="500" />
+    <Property Name="p_location_city" Type="varchar" MaxLength="50" />
+    <Property Name="p_location_map_id" Type="int" Nullable="false" />
+    <Property Name="p_location_station_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stations">
+    <Key>
+      <PropertyRef Name="s_id" />
+    </Key>
+    <Property Name="s_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="s_description" Type="varchar" MaxLength="500" />
+    <Property Name="s_image_location" Type="varchar" MaxLength="500" />
+    <Property Name="s_X_position" Type="int" />
+    <Property Name="s_Y_position" Type="int" />
+    <Property Name="s_Z_position" Type="int" />
+  </EntityType>
+  <Association Name="FK_Persons_Maps">
+    <End Role="Maps" Type="Self.Maps" Multiplicity="1" />
+    <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Maps">
+        <PropertyRef Name="m_id" />
+      </Principal>
+      <Dependent Role="Persons">
+        <PropertyRef Name="p_location_map_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persons_Stations">
+    <End Role="Stations" Type="Self.Stations" Multiplicity="1" />
+    <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stations">
+        <PropertyRef Name="s_id" />
+      </Principal>
+      <Dependent Role="Persons">
+        <PropertyRef Name="p_location_station_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="i2SWhereRUModelStoreContainer">
+    <EntitySet Name="Maps" EntityType="Self.Maps" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stations" EntityType="Self.Stations" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Persons_Maps" Association="Self.FK_Persons_Maps">
+      <End Role="Maps" EntitySet="Maps" />
+      <End Role="Persons" EntitySet="Persons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persons_Stations" Association="Self.FK_Persons_Stations">
+      <End Role="Stations" EntitySet="Stations" />
+      <End Role="Persons" EntitySet="Persons" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

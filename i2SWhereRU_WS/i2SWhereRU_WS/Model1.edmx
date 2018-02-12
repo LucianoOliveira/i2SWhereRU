@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="i2SWhereRUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Maps">
+          <Key>
+            <PropertyRef Name="m_id" />
+          </Key>
+          <Property Name="m_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="m_description" Type="varchar" MaxLength="50" />
+          <Property Name="m_image_location" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="p_id" />
+          </Key>
+          <Property Name="p_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="p_name" Type="varchar" MaxLength="100" />
+          <Property Name="p_image_location" Type="varchar" MaxLength="500" />
+          <Property Name="p_location_city" Type="varchar" MaxLength="50" />
+          <Property Name="p_location_map_id" Type="int" Nullable="false" />
+          <Property Name="p_location_station_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stations">
+          <Key>
+            <PropertyRef Name="s_id" />
+          </Key>
+          <Property Name="s_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="s_description" Type="varchar" MaxLength="500" />
+          <Property Name="s_image_location" Type="varchar" MaxLength="500" />
+          <Property Name="s_X_position" Type="int" />
+          <Property Name="s_Y_position" Type="int" />
+          <Property Name="s_Z_position" Type="int" />
+        </EntityType>
+        <Association Name="FK_Persons_Maps">
+          <End Role="Maps" Type="Self.Maps" Multiplicity="1" />
+          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maps">
+              <PropertyRef Name="m_id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="p_location_map_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persons_Stations">
+          <End Role="Stations" Type="Self.Stations" Multiplicity="1" />
+          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stations">
+              <PropertyRef Name="s_id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="p_location_station_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="i2SWhereRUModelStoreContainer">
+          <EntitySet Name="Maps" EntityType="Self.Maps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stations" EntityType="Self.Stations" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Persons_Maps" Association="Self.FK_Persons_Maps">
+            <End Role="Maps" EntitySet="Maps" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persons_Stations" Association="Self.FK_Persons_Stations">
+            <End Role="Stations" EntitySet="Stations" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="i2SWhereRUModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Map">
+          <Key>
+            <PropertyRef Name="m_id" />
+          </Key>
+          <Property Name="m_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="m_description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="m_image_location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Persons" Relationship="Self.FK_Persons_Maps" FromRole="Maps" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="p_id" />
+          </Key>
+          <Property Name="p_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="p_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="p_image_location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="p_location_city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="p_location_map_id" Type="Int32" Nullable="false" />
+          <Property Name="p_location_station_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Map" Relationship="Self.FK_Persons_Maps" FromRole="Persons" ToRole="Maps" />
+          <NavigationProperty Name="Station" Relationship="Self.FK_Persons_Stations" FromRole="Persons" ToRole="Stations" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="s_id" />
+          </Key>
+          <Property Name="s_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="s_description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="s_image_location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="s_X_position" Type="Int32" />
+          <Property Name="s_Y_position" Type="Int32" />
+          <Property Name="s_Z_position" Type="Int32" />
+          <NavigationProperty Name="Persons" Relationship="Self.FK_Persons_Stations" FromRole="Stations" ToRole="Persons" />
+        </EntityType>
+        <Association Name="FK_Persons_Maps">
+          <End Role="Maps" Type="Self.Map" Multiplicity="1" />
+          <End Role="Persons" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maps">
+              <PropertyRef Name="m_id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="p_location_map_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persons_Stations">
+          <End Role="Stations" Type="Self.Station" Multiplicity="1" />
+          <End Role="Persons" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stations">
+              <PropertyRef Name="s_id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="p_location_station_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="i2SWhereRUEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Maps" EntityType="Self.Map" />
+          <EntitySet Name="Persons" EntityType="Self.Person" />
+          <EntitySet Name="Stations" EntityType="Self.Station" />
+          <AssociationSet Name="FK_Persons_Maps" Association="Self.FK_Persons_Maps">
+            <End Role="Maps" EntitySet="Maps" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persons_Stations" Association="Self.FK_Persons_Stations">
+            <End Role="Stations" EntitySet="Stations" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="i2SWhereRUModelStoreContainer" CdmEntityContainer="i2SWhereRUEntities">
+          <EntitySetMapping Name="Maps">
+            <EntityTypeMapping TypeName="i2SWhereRUModel.Map">
+              <MappingFragment StoreEntitySet="Maps">
+                <ScalarProperty Name="m_id" ColumnName="m_id" />
+                <ScalarProperty Name="m_description" ColumnName="m_description" />
+                <ScalarProperty Name="m_image_location" ColumnName="m_image_location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="i2SWhereRUModel.Person">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="p_id" ColumnName="p_id" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="p_image_location" ColumnName="p_image_location" />
+                <ScalarProperty Name="p_location_city" ColumnName="p_location_city" />
+                <ScalarProperty Name="p_location_map_id" ColumnName="p_location_map_id" />
+                <ScalarProperty Name="p_location_station_id" ColumnName="p_location_station_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stations">
+            <EntityTypeMapping TypeName="i2SWhereRUModel.Station">
+              <MappingFragment StoreEntitySet="Stations">
+                <ScalarProperty Name="s_id" ColumnName="s_id" />
+                <ScalarProperty Name="s_description" ColumnName="s_description" />
+                <ScalarProperty Name="s_image_location" ColumnName="s_image_location" />
+                <ScalarProperty Name="s_X_position" ColumnName="s_X_position" />
+                <ScalarProperty Name="s_Y_position" ColumnName="s_Y_position" />
+                <ScalarProperty Name="s_Z_position" ColumnName="s_Z_position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

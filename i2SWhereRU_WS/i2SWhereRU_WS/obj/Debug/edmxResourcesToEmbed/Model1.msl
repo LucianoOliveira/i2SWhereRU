@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="i2SWhereRUModelStoreContainer" CdmEntityContainer="i2SWhereRUEntities">
+    <EntitySetMapping Name="Maps">
+      <EntityTypeMapping TypeName="i2SWhereRUModel.Map">
+        <MappingFragment StoreEntitySet="Maps">
+          <ScalarProperty Name="m_id" ColumnName="m_id" />
+          <ScalarProperty Name="m_description" ColumnName="m_description" />
+          <ScalarProperty Name="m_image_location" ColumnName="m_image_location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persons">
+      <EntityTypeMapping TypeName="i2SWhereRUModel.Person">
+        <MappingFragment StoreEntitySet="Persons">
+          <ScalarProperty Name="p_id" ColumnName="p_id" />
+          <ScalarProperty Name="p_name" ColumnName="p_name" />
+          <ScalarProperty Name="p_image_location" ColumnName="p_image_location" />
+          <ScalarProperty Name="p_location_city" ColumnName="p_location_city" />
+          <ScalarProperty Name="p_location_map_id" ColumnName="p_location_map_id" />
+          <ScalarProperty Name="p_location_station_id" ColumnName="p_location_station_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stations">
+      <EntityTypeMapping TypeName="i2SWhereRUModel.Station">
+        <MappingFragment StoreEntitySet="Stations">
+          <ScalarProperty Name="s_id" ColumnName="s_id" />
+          <ScalarProperty Name="s_description" ColumnName="s_description" />
+          <ScalarProperty Name="s_image_location" ColumnName="s_image_location" />
+          <ScalarProperty Name="s_X_position" ColumnName="s_X_position" />
+          <ScalarProperty Name="s_Y_position" ColumnName="s_Y_position" />
+          <ScalarProperty Name="s_Z_position" ColumnName="s_Z_position" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

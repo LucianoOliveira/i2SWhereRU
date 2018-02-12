@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="i2SWhereRUModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Map">
+    <Key>
+      <PropertyRef Name="m_id" />
+    </Key>
+    <Property Name="m_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="m_description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="m_image_location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Persons" Relationship="Self.FK_Persons_Maps" FromRole="Maps" ToRole="Persons" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="p_id" />
+    </Key>
+    <Property Name="p_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="p_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="p_image_location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="p_location_city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="p_location_map_id" Type="Int32" Nullable="false" />
+    <Property Name="p_location_station_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Map" Relationship="Self.FK_Persons_Maps" FromRole="Persons" ToRole="Maps" />
+    <NavigationProperty Name="Station" Relationship="Self.FK_Persons_Stations" FromRole="Persons" ToRole="Stations" />
+  </EntityType>
+  <EntityType Name="Station">
+    <Key>
+      <PropertyRef Name="s_id" />
+    </Key>
+    <Property Name="s_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="s_description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="s_image_location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="s_X_position" Type="Int32" />
+    <Property Name="s_Y_position" Type="Int32" />
+    <Property Name="s_Z_position" Type="Int32" />
+    <NavigationProperty Name="Persons" Relationship="Self.FK_Persons_Stations" FromRole="Stations" ToRole="Persons" />
+  </EntityType>
+  <Association Name="FK_Persons_Maps">
+    <End Role="Maps" Type="Self.Map" Multiplicity="1" />
+    <End Role="Persons" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Maps">
+        <PropertyRef Name="m_id" />
+      </Principal>
+      <Dependent Role="Persons">
+        <PropertyRef Name="p_location_map_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persons_Stations">
+    <End Role="Stations" Type="Self.Station" Multiplicity="1" />
+    <End Role="Persons" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stations">
+        <PropertyRef Name="s_id" />
+      </Principal>
+      <Dependent Role="Persons">
+        <PropertyRef Name="p_location_station_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="i2SWhereRUEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Maps" EntityType="Self.Map" />
+    <EntitySet Name="Persons" EntityType="Self.Person" />
+    <EntitySet Name="Stations" EntityType="Self.Station" />
+    <AssociationSet Name="FK_Persons_Maps" Association="Self.FK_Persons_Maps">
+      <End Role="Maps" EntitySet="Maps" />
+      <End Role="Persons" EntitySet="Persons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persons_Stations" Association="Self.FK_Persons_Stations">
+      <End Role="Stations" EntitySet="Stations" />
+      <End Role="Persons" EntitySet="Persons" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
